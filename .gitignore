@@ -4,3 +4,6 @@
 .flutter-plugins-dependencies
 build
 .idea
+
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
