@@ -11,6 +11,7 @@ class Devmvk extends StatelessWidget {
       create: (BuildContext context) => AppConfig(),
       child: MaterialApp(
         title: 'Material App',
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
             title: Text('Material App Bar'),
