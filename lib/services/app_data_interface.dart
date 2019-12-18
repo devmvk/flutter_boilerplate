@@ -12,4 +12,5 @@ class AppDataInterface{
         ? APIUrls.prodBaseUrl
         : APIUrls.testBaseUrl,
   );
+  NetworkHandler get networkHandler => this._networkHandler;
 }
