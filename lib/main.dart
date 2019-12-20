@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_boilerplate/appconfig.dart';
+import 'package:project_boilerplate/screens/landing_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(Devmvk());
@@ -12,16 +13,7 @@ class Devmvk extends StatelessWidget {
       child: MaterialApp(
         title: 'Material App',
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Material App Bar'),
-          ),
-          body: Center(
-            child: Container(
-              child: Text('Hello World'),
-            ),
-          ),
-        ),
+        home: LandingController()
       ),
     );
   }

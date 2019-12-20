@@ -1,4 +1,4 @@
 
-class AutheticationBloc{
+class AuthenticationBloc{
   
 }
