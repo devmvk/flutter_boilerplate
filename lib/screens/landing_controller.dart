@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_boilerplate/blocs/authentication_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'authentication_screen.dart';
+
 class LandingController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,7 +11,7 @@ class LandingController extends StatelessWidget {
       create: (BuildContext context) => AuthenticationBloc(),
       child: Consumer<AuthenticationBloc>(
         builder: (BuildContext context, AuthenticationBloc bloc, Widget child) {
-          return Container();
+          return AuthenticationScreen.create(context);
         },
       ),
     );
