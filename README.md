@@ -15,7 +15,6 @@ A Flutter boillerplate project with following plugin setups.
 6) `secure_storage` for token storage
 7) Network provider with `http`
 8) Connectivity
-9) Camera
 and so on .......
 
 ## Getting Started
