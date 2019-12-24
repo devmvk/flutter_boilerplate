@@ -32,10 +32,10 @@ class AuthenticationScreen extends StatelessWidget {
 
   
   void _showError(BuildContext context, PlatformException exception){
-    // PlatformExceptionAlertDialog(
-    //   exception: exception,
-    //   title: "Sign In Failed",
-    // ).show(context);
+    PlatformExceptionAlertDialog(
+      exception: exception,
+      title: "Sign In Failed",
+    ).show(context);
   }
 
   void _signInAnonymously (BuildContext context) async{
