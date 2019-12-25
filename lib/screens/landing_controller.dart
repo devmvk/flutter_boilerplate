@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:project_boilerplate/blocs/authentication_bloc.dart';
 import 'package:provider/provider.dart';
-
+import 'package:project_boilerplate/services/handlers/firebase/firebase_authentication_handler.dart';
 import 'authentication_screen.dart';
 
 class LandingController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<AuthenticationBloc>(
-      create: (BuildContext context) => AuthenticationBloc(),
-      child: Consumer<AuthenticationBloc>(
-        builder: (BuildContext context, AuthenticationBloc bloc, Widget child) {
-          return AuthenticationScreen.create(context);
+    return Provider<AuthBase>(
+      create: (BuildContext context) => AuthBaseImpl(),
+      child: Consumer<AuthBase>(
+        builder: (
+          BuildContext context,
+          AuthBase auth,
+          Widget child,
+        ) {
+          return Provider<AuthenticationBloc>(
+            create: (BuildContext context) => AuthenticationBloc(
+              isLoading: ValueNotifier<bool>(false),
+              auth: auth,
+            ),
+            child: Consumer<AuthenticationBloc>(
+              builder: (
+                BuildContext context,
+                AuthenticationBloc bloc,
+                Widget child,
+              ) {
+                return AuthenticationScreen.create(context);
+              },
+            ),
+          );
         },
       ),
     );
