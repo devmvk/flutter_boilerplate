@@ -9,6 +9,7 @@ abstract class AuthBase{
   Future<User> emailAndPasswordSignIn(String email, String password);
   Future<User> createAccount(String email, String password);
   Future<void> signOut();
+  Future<User> phoneAuthentication();
   Stream<User> get onAuthStateChanged;
 
 }
@@ -21,6 +22,7 @@ class AuthBaseImpl extends AuthBase{
   Future<User> emailAndPasswordSignIn(String email, String password) =>  null;
   Future<User> createAccount(String email, String password) =>  null;
   Future<void> signOut() =>  null;
+  Future<User> phoneAuthentication() => null;
   Stream<User> get onAuthStateChanged =>  null;
 }
 
