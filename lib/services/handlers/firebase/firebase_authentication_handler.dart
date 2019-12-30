@@ -14,6 +14,7 @@ abstract class AuthBase{
 
 }
 
+//TODO implement all the authentication
 class AuthBaseImpl extends AuthBase{
   Future<User> currentUser() =>  null;
   Future<User> signInAnonymously() =>  null;
