@@ -3,12 +3,13 @@ import 'package:project_boilerplate/blocs/authentication_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:project_boilerplate/services/handlers/firebase/firebase_authentication_handler.dart';
 import 'authentication_screen.dart';
+import 'package:project_boilerplate/services/handlers/firebase/firebase_handler.dart';
 
 class LandingController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<AuthBase>(
-      create: (BuildContext context) => AuthBaseImpl(),
+      create: (BuildContext context) => FirebaseHandler(),
       child: Consumer<AuthBase>(
         builder: (
           BuildContext context,
