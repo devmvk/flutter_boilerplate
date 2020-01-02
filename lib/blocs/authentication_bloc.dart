@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:project_boilerplate/services/handlers/firebase/firebase_authentication_handler.dart';
 
-class AuthenticationBloc{
+class AuthenticationManager{
   final AuthBase auth;
   final ValueNotifier<bool> isLoading;
-  AuthenticationBloc({@required this.auth, @required this.isLoading});
+  AuthenticationManager({@required this.auth, @required this.isLoading});
   
   
   Future<User> _signIn(Future<User> Function() signInMethod) async{

@@ -16,15 +16,15 @@ class LandingController extends StatelessWidget {
           AuthBase auth,
           Widget child,
         ) {
-          return Provider<AuthenticationBloc>(
-            create: (BuildContext context) => AuthenticationBloc(
+          return Provider<AuthenticationManager>(
+            create: (BuildContext context) => AuthenticationManager(
               isLoading: ValueNotifier<bool>(false),
               auth: auth,
             ),
-            child: Consumer<AuthenticationBloc>(
+            child: Consumer<AuthenticationManager>(
               builder: (
                 BuildContext context,
-                AuthenticationBloc bloc,
+                AuthenticationManager bloc,
                 Widget child,
               ) {
                 return AuthenticationScreen.create(context);
