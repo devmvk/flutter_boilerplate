@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_boilerplate/blocs/authentication_bloc.dart';
-import 'package:project_boilerplate/services/handlers/firebase/firebase_authentication_handler.dart';
+import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:project_boilerplate/common_widgets/widgets.dart';
 

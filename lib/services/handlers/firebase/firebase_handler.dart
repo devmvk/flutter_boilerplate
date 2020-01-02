@@ -1,6 +1,13 @@
-import 'firebase_authentication_handler.dart';
+
+
+import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
 
 class FirebaseHandler extends AuthBase{
+
+  FirebaseHandler._();
+
+  static FirebaseHandler get instance => FirebaseHandler._();
+
   Future<User> currentUser() =>  null;
   Future<User> signInAnonymously() =>  null;
   Future<User> googleSignIn() =>  null;

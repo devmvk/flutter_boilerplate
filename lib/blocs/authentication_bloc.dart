@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:project_boilerplate/services/handlers/firebase/firebase_authentication_handler.dart';
+import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
 
 class AuthenticationManager{
   final AuthBase auth;
