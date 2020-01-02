@@ -98,6 +98,6 @@ class FirebaseHandler extends AuthBase{
     return _auth.signOut();
   }
   
-  @override Future<User> phoneAuthentication() => null;
+  @override Future<User> mobileSignIn() => null;
   @override Stream<User> get onAuthStateChanged =>  _auth.onAuthStateChanged.map((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName) : null);
 }

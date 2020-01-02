@@ -22,4 +22,5 @@ class AuthenticationManager{
   Future<User> signInAnonymously() async => await _signIn(auth.signInAnonymously);
   Future<User> googleSignIn() async => await _signIn(auth.googleSignIn);
   Future<User> facebookSignIn() async => await _signIn(auth.facebookSignIn);
+  Future<User> mobileSignIn() async => await _signIn(auth.mobileSignIn);
 }

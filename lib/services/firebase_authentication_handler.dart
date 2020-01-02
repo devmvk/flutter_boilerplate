@@ -9,7 +9,7 @@ abstract class AuthBase{
   Future<User> emailAndPasswordSignIn(String email, String password);
   Future<User> createAccount(String email, String password);
   Future<void> signOut();
-  Future<User> phoneAuthentication();
+  Future<User> mobileSignIn();
   Stream<User> get onAuthStateChanged;
 
 }
