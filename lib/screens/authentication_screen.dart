@@ -1,32 +1,34 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:project_boilerplate/blocs/authentication_bloc.dart';
+import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:project_boilerplate/common_widgets/widgets.dart';
 
 
 class AuthenticationScreen extends StatelessWidget {
 
-  //final SignInManager manager;
+  final AuthenticationManager manager;
   final bool isLoading;
 
   const AuthenticationScreen({Key key,
-    //@required this.manager,
+    @required this.manager,
     @required this.isLoading
    }) : super(key: key);
 
   static Widget create(BuildContext context){
-    //final AuthBase auth = Provider.of<AuthBase>(context);
+    final AuthBase auth = Provider.of<AuthBase>(context);
     return ChangeNotifierProvider<ValueNotifier<bool>>(
       create: (_) => ValueNotifier<bool>(false),
-      // child: Consumer(
-      //   // builder: (_, ValueNotifier<bool> isLoading, __) => Provider<SignInManager>(
-      //   //   // create: (_) => SignInManager(auth: auth, isLoading: isLoading),
-      //   //   // child: Consumer<SignInManager>(
-      //   //   //   builder: (context, manager, _) => SignInView(manager: manager, isLoading: isLoading.value,)
-      //   //   // ),
-      //   // ),
-      // ),
+       child: Consumer(
+        builder: (_, ValueNotifier<bool> isLoading, __) => Provider<AuthenticationManager>(
+          create: (_) => AuthenticationManager(auth: auth, isLoading: isLoading),
+          child: Consumer<AuthenticationManager>(
+            builder: (context, manager, _) => AuthenticationScreen(manager: manager, isLoading: isLoading.value,)
+          ),
+        ),
+      ),
     );
   }
 
@@ -38,9 +40,9 @@ class AuthenticationScreen extends StatelessWidget {
     ).show(context);
   }
 
-  void _signInAnonymously (BuildContext context) async{
+  void _signInAnonymously(BuildContext context) async{
     try{
-      //await manager.signInAnonymously();
+      await manager.signInAnonymously();
     }on PlatformException catch (e){
       _showError(context, e);
     }catch(e){
@@ -50,7 +52,7 @@ class AuthenticationScreen extends StatelessWidget {
 
   void _googleSignIn(BuildContext context) async{
     try{
-      //await manager.googleSignIn();
+      await manager.googleSignIn();
     }on PlatformException catch (e){
       _showError(context, e);
     }catch(e){
@@ -61,7 +63,7 @@ class AuthenticationScreen extends StatelessWidget {
 
   void _facebookSignIn(BuildContext context) async{
     try{
-      //await manager.facebookSignIn();
+      await manager.facebookSignIn();
     }on PlatformException catch (e){
       _showError(context, e);
     }catch(e){
@@ -69,17 +71,25 @@ class AuthenticationScreen extends StatelessWidget {
     }
   }
 
-  // void _emailSignIn(BuildContext context){
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (BuildContext context) => EmailSignIn()
-  //     )
-  //   );
-  // }
+  void _emailSignIn(BuildContext context){
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (BuildContext context) => EmailSignIn()
+    //   )
+    // );
+  }
+
+  void _phoneAuthentication(BuildContext context){
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (BuildContext context) => EmailSignIn()
+    //   )
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {
-    //final _isLoading = Provider.of<ValueNotifier<bool>>(context);
+    final _isLoading = Provider.of<ValueNotifier<bool>>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -104,7 +114,6 @@ class AuthenticationScreen extends StatelessWidget {
             ),
             // for commit
             SocialSignInButton(
-              assetName: "images/google-logo.png",
               color: Colors.white,
               onPressed: isLoading ? null : () => _googleSignIn(context),
               text: "Sign in with Google",
@@ -115,7 +124,6 @@ class AuthenticationScreen extends StatelessWidget {
               height: 8.0,
             ),
             SocialSignInButton(
-              assetName: "images/facebook-logo.png",
               color: Color(0xFF334D92),
               onPressed: isLoading ? null : () => _facebookSignIn(context),
               text: "Sign in with Facebook",
@@ -128,7 +136,7 @@ class AuthenticationScreen extends StatelessWidget {
               color: Colors.teal.shade700,
               textColor: Colors.white,
               text: "Sign in with Email",
-              //onPressed: isLoading ? null : () => _emailSignIn(context),
+              onPressed: isLoading ? null : () => _emailSignIn(context),
             ),
             SizedBox(
               height: 8.0,
@@ -136,6 +144,12 @@ class AuthenticationScreen extends StatelessWidget {
             Text("or", textAlign: TextAlign.center, style: TextStyle(fontSize: 14.0, color: Colors.black87),),
             SizedBox(
               height: 8.0,
+            ),
+            SignInButton(
+              color: Colors.purple.shade600,
+              textColor: Colors.white30,
+              text: "Phone authentication",
+              onPressed: isLoading ? null : () =>  _phoneAuthentication(context),
             ),
             SignInButton(
               color: Colors.lime.shade300,
