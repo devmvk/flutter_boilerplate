@@ -11,7 +11,7 @@ abstract class AuthBase{
   Future<void> signOut();
   Future<User> mobileSignIn();
   Stream<User> get onAuthStateChanged;
-
+  Future<void> verifyPhoneNumber({@required String mobileNumber});
 }
 
 class User{
