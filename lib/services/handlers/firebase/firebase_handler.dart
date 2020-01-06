@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseHandler extends AuthBase{
   String _phoneVerificationId;
@@ -13,6 +14,7 @@ class FirebaseHandler extends AuthBase{
   static FirebaseHandler get instance => FirebaseHandler._();
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+  Firestore _store = Firestore.instance;
 
   @override Future<User> currentUser() async{
     return _auth.currentUser()
@@ -167,5 +169,9 @@ class FirebaseHandler extends AuthBase{
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
         );
+  }
+
+  Future getCollection({@required String path}) async {
+    await _store.collection(path).getDocuments();
   }
 }
