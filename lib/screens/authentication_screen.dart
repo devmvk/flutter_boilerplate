@@ -141,15 +141,18 @@ class AuthenticationScreen extends StatelessWidget {
             SizedBox(
               height: 8.0,
             ),
-            Text("or", textAlign: TextAlign.center, style: TextStyle(fontSize: 14.0, color: Colors.black87),),
+            SignInButton(
+              color: Colors.purple.shade600,
+              textColor: Colors.white,
+              text: "Phone authentication",
+              onPressed: isLoading ? null : () =>  _phoneAuthentication(context),
+            ),
             SizedBox(
               height: 8.0,
             ),
-            SignInButton(
-              color: Colors.purple.shade600,
-              textColor: Colors.white30,
-              text: "Phone authentication",
-              onPressed: isLoading ? null : () =>  _phoneAuthentication(context),
+            Text("or", textAlign: TextAlign.center, style: TextStyle(fontSize: 14.0, color: Colors.black87),),
+            SizedBox(
+              height: 8.0,
             ),
             SignInButton(
               color: Colors.lime.shade300,
