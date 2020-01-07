@@ -16,6 +16,8 @@ class FirebaseHandler extends AuthBase{
   FirebaseAuth _auth = FirebaseAuth.instance;
   Firestore _store = Firestore.instance;
 
+  Firestore get store => this._store;
+
   @override Future<User> currentUser() async{
     return _auth.currentUser()
       .then((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName) : null)
