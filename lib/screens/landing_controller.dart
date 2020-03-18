@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_boilerplate/blocs/authentication_bloc.dart';
+import 'package:project_boilerplate/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:project_boilerplate/services/firebase_authentication_handler.dart';
 import 'authentication_screen.dart';
@@ -27,7 +28,15 @@ class LandingController extends StatelessWidget {
                 AuthenticationManager bloc,
                 Widget child,
               ) {
-                return AuthenticationScreen.create(context);
+                return StreamBuilder<User>(
+                  stream: bloc.onAuthChanged ,
+                  builder: (BuildContext context, AsyncSnapshot<User> snapshot){
+                    if(snapshot.hasData){
+                      return HomeScreen();
+                    }
+                    return AuthenticationScreen.create(context);
+                  },
+                );
               },
             ),
           );
