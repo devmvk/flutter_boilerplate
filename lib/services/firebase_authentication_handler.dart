@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 abstract class AuthBase{
@@ -18,5 +19,6 @@ class User{
   final String uid;
   final String displayName;
   final String avatarUrl;
-  User({@required this.uid, @required this.avatarUrl, @required this.displayName});
+  final AuthResult result;
+  User({@required this.uid, @required this.avatarUrl, @required this.displayName, this.result});
 }
