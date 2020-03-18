@@ -32,7 +32,7 @@ class LandingController extends StatelessWidget {
                   stream: bloc.onAuthChanged ,
                   builder: (BuildContext context, AsyncSnapshot<User> snapshot){
                     if(snapshot.hasData){
-                      return HomeScreen();
+                      return HomeScreen(user: snapshot.data,);
                     }
                     return AuthenticationScreen.create(context);
                   },

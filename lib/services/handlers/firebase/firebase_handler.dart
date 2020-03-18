@@ -20,13 +20,13 @@ class FirebaseHandler extends AuthBase{
 
   @override Future<User> currentUser() async{
     return _auth.currentUser()
-      .then((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName,) : null)
+      .then((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName, fbUser: _fireUser) : null)
       .catchError((e){print(e.toString());});
   }
 
   @override Future<User> signInAnonymously() async{
     return _auth.signInAnonymously()
-      .then((_fireAuthResult) => User(uid: _fireAuthResult.user.uid, avatarUrl: _fireAuthResult.user.photoUrl, displayName: _fireAuthResult.user.displayName, result: _fireAuthResult))
+      .then((_fireAuthResult) => User(uid: _fireAuthResult.user.uid, avatarUrl: _fireAuthResult.user.photoUrl, displayName: _fireAuthResult.user.displayName, fbUser: _fireAuthResult.user))
       .catchError((e){print(e.toString());});
   }
   
@@ -41,7 +41,7 @@ class FirebaseHandler extends AuthBase{
             idToken: _gAuthentication.idToken,
             accessToken: _gAuthentication.accessToken
           )
-        ).then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, result: _fbAuth) : null);
+        ).then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, fbUser: _fbAuth.user) : null);
       }else{
         throw StateError("");
       }
@@ -61,7 +61,7 @@ class FirebaseHandler extends AuthBase{
             FacebookAuthProvider.getCredential(
               accessToken: _result.accessToken.token
             )
-          ).then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, result: _fbAuth) : null);
+          ).then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, fbUser: _fbAuth.user) : null);
           break;
         case FacebookLoginStatus.cancelledByUser:
           throw StateError("User Cancelled");
@@ -77,7 +77,7 @@ class FirebaseHandler extends AuthBase{
   @override Future<User> emailAndPasswordSignIn(String email, String password) async{
     try{
       return _auth.signInWithEmailAndPassword(email: email, password: password)
-      .then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, result: _fbAuth) : null);
+      .then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, fbUser: _fbAuth.user) : null);
     }catch (e){
       throw Exception(e.toString());
     }
@@ -86,7 +86,7 @@ class FirebaseHandler extends AuthBase{
   @override Future<User> createAccount(String email, String password) async{
     try{
       return _auth.createUserWithEmailAndPassword(email: email, password: password)
-      .then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, result: _fbAuth) : null);
+      .then<User>((AuthResult _fbAuth) => _fbAuth.user != null ? User(uid: _fbAuth.user.uid, avatarUrl: _fbAuth.user.photoUrl, displayName: _fbAuth.user.displayName, fbUser: _fbAuth.user) : null);
     }catch (e){
       throw Exception(e.toString());
     }
@@ -127,7 +127,7 @@ class FirebaseHandler extends AuthBase{
     // });
     return user != null ? User(uid: user.uid, avatarUrl: user.photoUrl, displayName: user.displayName) : null;
   }
-  @override Stream<User> get onAuthStateChanged =>  _auth.onAuthStateChanged.map((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName) : null);
+  @override Stream<User> get onAuthStateChanged =>  _auth.onAuthStateChanged.map((_fireUser) => _fireUser != null ? User(uid: _fireUser.uid, avatarUrl: _fireUser.photoUrl, displayName: _fireUser.displayName, fbUser: _fireUser) : null);
 
   Future<void> verifyPhoneNumber({@required String mobileNumber}) async {
     final PhoneVerificationCompleted verificationCompleted =
